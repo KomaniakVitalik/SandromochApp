@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sandromoch.sandromochapp.fragments.MonumentsComplexFragment">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_extra_tall"
+            android:background="@color/blue_dark"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <RadioButton
+                    android:id="@+id/rd_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:background="@null"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/selector_radio_button"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:text="@string/all"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_large" />
+
+                <RadioButton
+                    android:id="@+id/rd_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_big_plus"
+                    android:layout_toRightOf="@+id/rd_all"
+                    android:background="@null"
+                    android:button="@android:color/transparent"
+                    android:drawableLeft="@drawable/selector_radio_button"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:text="@string/private_"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_large" />
+
+                <RadioButton
+                    android:id="@+id/rd_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/spacing_big_plus"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/selector_radio_button"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:text="@string/group"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_large" />
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_normal"
+                android:layout_margin="@dimen/spacing_medium"
+                android:background="@drawable/background_white">
+
+                <EditText
+                    android:id="@+id/edt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:layout_toLeftOf="@+id/img_search"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="@dimen/text_large" />
+
+                <ImageView
+                    android:id="@+id/img_clear"
+                    android:layout_width="@dimen/button_height_short"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    android:src="@drawable/close" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_toLeftOf="@+id/img_clear"
+                    android:background="@color/blue_dark" />
+
+                <ImageView
+                    android:id="@+id/img_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:layout_toLeftOf="@+id/divider"
+                    android:src="@drawable/search" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_variants"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/search"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top" />
+
+</RelativeLayout>

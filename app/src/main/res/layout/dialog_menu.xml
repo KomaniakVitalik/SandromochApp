@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/spacing_extra_huge"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_authorized"
+            android:textStyle="bold"
+            app:custom_font="RobotoRegular" />
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sub_title"
+            android:textColor="@color/white_transparent_alpha08"
+            android:textSize="@dimen/text_large_plus" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_transparent_alpha08" />
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:id="@+id/tv_memorial_complex"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_tall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/memorial_complex"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:custom_font="RobotoRegular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_transparent_alpha08" />
+
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:id="@+id/tv_memorials_map"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_tall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/memorials_map"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:custom_font="RobotoRegular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_transparent_alpha08" />
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:id="@+id/tv_members_days"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_tall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/members_days"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:custom_font="RobotoRegular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_transparent_alpha08" />
+
+        <com.sandromoch.sandromochapp.ui.TextViewFont
+            android:id="@+id/tv_how_to_get"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_tall"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/how_to_get"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold"
+            app:custom_font="RobotoRegular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/white_transparent_alpha08" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

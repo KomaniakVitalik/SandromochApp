@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_darker"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_auto_complite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height_short"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:textColor="@color/white" />
+
+</LinearLayout>
