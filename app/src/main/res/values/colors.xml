@@ -9,6 +9,7 @@
 
     <color name="blue_dark">#323d4b</color>
     <color name="blue_darker">#27313d</color>
+    <color name="blue_pressed">#586b82</color>
 
     <color name="white_transparent_alpha02">#33FFFFFF</color>
     <color name="white_transparent_alpha05">#7FFFFFFF</color>

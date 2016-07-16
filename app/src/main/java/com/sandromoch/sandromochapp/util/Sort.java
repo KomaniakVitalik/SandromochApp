@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class Sort {
 
-    public static List<Monument> sortByType(List<Monument> results, int type) {
+    public static List<Monument> sortByType(List<Monument> results, int type, String mask) {
         List<Monument> temp = new ArrayList<>();
         for (Monument monument : results) {
-            if (monument.getMonumentType() == type) {
+            if (monument.getMonumentType() == type && monument.getName().contains(mask)) {
                 temp.add(monument);
             }
         }

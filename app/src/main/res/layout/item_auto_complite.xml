@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_darker"
+    android:background="@drawable/selector_blue"
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <TextView
+    <com.sandromoch.sandromochapp.ui.TextViewFont
         android:id="@+id/tv_auto_complite"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height_short"
         android:paddingLeft="@dimen/spacing_normal"
-        android:textColor="@color/white" />
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_large_plus"
+        app:custom_font="RobotoRegular" />
 
 </LinearLayout>

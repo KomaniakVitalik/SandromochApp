@@ -9,11 +9,24 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sandromoch.sandromochapp.CoreApp;
 import com.sandromoch.sandromochapp.R;
+import com.sandromoch.sandromochapp.adapters.MonumentsAutoCompleteAdapter;
+import com.sandromoch.sandromochapp.models.monument.Monument;
 import com.sandromoch.sandromochapp.models.monument.MonumentResponse;
+import com.sandromoch.sandromochapp.util.Const;
+import com.sandromoch.sandromochapp.util.Logger;
+
+import java.util.List;
 
 import retrofit2.Response;
 
@@ -22,11 +35,20 @@ import retrofit2.Response;
  * Use the {@link MonumentsComplexFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MonumentsComplexFragment extends BaseFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class MonumentsComplexFragment extends BaseFragment
+        implements
+        View.OnClickListener
+        , CompoundButton.OnCheckedChangeListener
+        , OnMapReadyCallback
+        // , GoogleMap.InfoWindowAdapter
+        , GoogleMap.OnMapClickListener {
 
     private View mView;
     private EditText mSearchFiled;
-    private int monumentType;
+    private int monumentType = 0;
+    private MonumentsAutoCompleteAdapter autoCompleteAdapter;
+    private MapFragment mapFragment;
+    private GoogleMap googleMap;
 
     public MonumentsComplexFragment() {
         // Required empty public constructor
@@ -61,15 +83,60 @@ public class MonumentsComplexFragment extends BaseFragment implements View.OnCli
         clear.setOnClickListener(this);
 
         mSearchFiled = (EditText) mView.findViewById(R.id.edt_search);
+
+        ListView monumentsVariants = (ListView) mView.findViewById(R.id.lv_variants);
+        autoCompleteAdapter = new MonumentsAutoCompleteAdapter(getActivity());
+        monumentsVariants.setAdapter(autoCompleteAdapter);
+
+        iniMap();
     }
+
+    private void iniMap() {
+        mapFragment = (MapFragment) getActivity().getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    private void addMarker(GoogleMap map, double lat, double lon, String title) {
+        map.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
+                .title(title)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.google_marker)));
+    }
+
 
     private void setupView() {
         initView();
+        getMonuments();
+    }
 
-        CoreApp.getInstance().getDataManager().getMonuments();
+    private void getMonuments() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CoreApp.getInstance().getDataManager().getMonuments();
+            }
+        }).start();
     }
 
     private void fillScreen(MonumentResponse monument) {
+        fillGoogleMap(monument.getResults());
+    }
+
+    private void fillGoogleMap(List<Monument> monuments) {
+        if(getGoogleMap() != null){
+            getGoogleMap().clear();
+            for (Monument monument : monuments) {
+                addMarker(getGoogleMap(), monument.getLat(), monument.getLon(), monument.getName());
+            }
+        }
+    }
+
+    private void fillAdapter(List<Monument> monuments) {
+        autoCompleteAdapter.setMonuments(monuments);
+        autoCompleteAdapter.notifyDataSetChanged();
+    }
+
+    private void makeSearch(int type) {
     }
 
     @Override
@@ -77,6 +144,7 @@ public class MonumentsComplexFragment extends BaseFragment implements View.OnCli
         super.onResponse(response, pendingRequestTag);
         if (response.body() instanceof MonumentResponse) {
             fillScreen((MonumentResponse) response.body());
+            Logger.e("onResponse():", ((MonumentResponse) response.body()).getCount() + "");
         }
     }
 
@@ -84,14 +152,33 @@ public class MonumentsComplexFragment extends BaseFragment implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_clear:
-                mSearchFiled.setText("");
+                mSearchFiled.setText(Const.EMPTY);
                 break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+        switch (buttonView.getId()) {
+            case R.id.rd_all:
+                if (isChecked) {
+                    setMonumentType(0);
+                    makeSearch(getMonumentType());
+                }
+                break;
+            case R.id.rd_private:
+                if (isChecked) {
+                    setMonumentType(1);
+                    makeSearch(getMonumentType());
+                }
+                break;
+            case R.id.rd_group:
+                if (isChecked) {
+                    setMonumentType(2);
+                    makeSearch(getMonumentType());
+                }
+                break;
+        }
     }
 
     public int getMonumentType() {
@@ -100,5 +187,23 @@ public class MonumentsComplexFragment extends BaseFragment implements View.OnCli
 
     public void setMonumentType(int monumentType) {
         this.monumentType = monumentType;
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        setGoogleMap(googleMap);
+    }
+
+    public GoogleMap getGoogleMap() {
+        return googleMap;
+    }
+
+    public void setGoogleMap(GoogleMap googleMap) {
+        this.googleMap = googleMap;
     }
 }
